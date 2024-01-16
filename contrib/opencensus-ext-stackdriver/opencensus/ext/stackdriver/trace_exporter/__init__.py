@@ -42,6 +42,11 @@ GAE_ATTRIBUTES = {
 # resource label structure
 RESOURCE_LABEL = "g.co/r/%s/%s"
 
+def fix_attribute_map(attributes):
+    if "attributeMap" in attributes:
+        attributes["attribute_map"] = attributes["attributeMap"]
+        del attributes["attributeMap"]
+    return attributes
 
 def _update_attr_map(span, attrs):
     attr_map = span.get("attributes", {}).get("attributeMap", {})
@@ -236,7 +241,7 @@ class StackdriverExporter(base_exporter.Exporter):
                 "start_time": span.get("startTime"),
                 "end_time": span.get("endTime"),
                 "span_id": str(span.get("spanId")),
-                "attributes": self.map_attributes(span.get("attributes")),
+                "attributes": self.map_attributes(fix_attribute_map(span.get("attributes"))),
                 "links": span.get("links"),
                 "status": span.get("status"),
                 "stack_trace": span.get("stackTrace"),
