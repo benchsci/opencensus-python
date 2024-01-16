@@ -232,22 +232,22 @@ class StackdriverExporter(base_exporter.Exporter):
 
             span_json = {
                 "name": span_name,
-                "displayName": span.get("displayName"),
-                "startTime": span.get("startTime"),
-                "endTime": span.get("endTime"),
-                "spanId": str(span.get("spanId")),
+                "display_name": span.get("displayName"),
+                "start_time": span.get("startTime"),
+                "end_time": span.get("endTime"),
+                "span_id": str(span.get("spanId")),
                 "attributes": self.map_attributes(span.get("attributes")),
                 "links": span.get("links"),
                 "status": span.get("status"),
-                "stackTrace": span.get("stackTrace"),
-                "timeEvents": span.get("timeEvents"),
-                "sameProcessAsParentSpan": span.get("sameProcessAsParentSpan"),
-                "childSpanCount": span.get("childSpanCount"),
+                "stack_trace": span.get("stackTrace"),
+                "time_events": span.get("timeEvents"),
+                "same_process_as_parent_span": span.get("sameProcessAsParentSpan"),
+                "child_span_count": span.get("childSpanCount"),
             }
 
             if span.get("parentSpanId") is not None:
                 parent_span_id = str(span.get("parentSpanId"))
-                span_json["parentSpanId"] = parent_span_id
+                span_json["parent_span_id"] = parent_span_id
 
             yield span_json
 
