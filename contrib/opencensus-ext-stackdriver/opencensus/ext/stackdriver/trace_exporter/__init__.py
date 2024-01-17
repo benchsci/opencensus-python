@@ -203,7 +203,7 @@ class StackdriverExporter(base_exporter.Exporter):
             trace = span_data.format_legacy_trace_json(sds)
             stackdriver_spans.extend(self.translate_to_stackdriver(trace))
 
-        self.client.batch_write_spans(spans=stackdriver_spans)
+        self.client.batch_write_spans(name=project, spans=stackdriver_spans)
 
     def export(self, span_datas):
         """
